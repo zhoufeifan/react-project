@@ -1,20 +1,13 @@
 'use strict';
 
-const errorOverlayMiddleware = require('react-error-overlay/middleware');
+const errorOverlayMiddleware = require('react-dev-utils/errorOverlayMiddleware');
 const noopServiceWorkerMiddleware = require('react-dev-utils/noopServiceWorkerMiddleware');
+const path = require('path');
 const config = require('./webpack.config.dev');
 const paths = require('./paths');
 
 const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
 const host = process.env.HOST || '0.0.0.0';
-
-let rewrites = [];
-// : [
-//     { from: /^\/advertise.html/, to: '/build/advertise.html' },
-// ]
-paths.appHtmlList.forEach(item=>{
-  rewrites.push({form:new RegExp(`^/${item.name}.html`),to:`/build/${item.name}.html`});
-});
 
 module.exports = function(proxy, allowedHost) {
   return {
@@ -34,8 +27,8 @@ module.exports = function(proxy, allowedHost) {
     // So we will disable the host check normally, but enable it if you have
     // specified the `proxy` setting. Finally, we let you override it if you
     // really know what you're doing with a special environment variable.
-    disableHostCheck: !proxy ||
-      process.env.DANGEROUSLY_DISABLE_HOST_CHECK === 'true',
+    disableHostCheck:
+      !proxy || process.env.DANGEROUSLY_DISABLE_HOST_CHECK === 'true',
     // Enable gzip compression of generated files.
     compress: true,
     // Silence WebpackDevServer's own logs since they're generally not useful.
@@ -72,8 +65,15 @@ module.exports = function(proxy, allowedHost) {
     quiet: true,
     // Reportedly, this avoids CPU overload on some systems.
     // https://github.com/facebookincubator/create-react-app/issues/293
+    // src/node_modules is not ignored to support absolute imports
+    // https://github.com/facebookincubator/create-react-app/issues/1065
     watchOptions: {
-      ignored: /node_modules/,
+      ignored: new RegExp(
+        `^(?!${path
+          .normalize(paths.appSrc + '/')
+          .replace(/[\\]+/g, '\\\\')}).+[\\\\/]node_modules[\\\\/]`,
+        'g'
+      ),
     },
     // Enable HTTPS if the HTTPS environment variable is set to 'true'
     https: protocol === 'https',
@@ -83,8 +83,6 @@ module.exports = function(proxy, allowedHost) {
       // Paths with dots should still use the history fallback.
       // See https://github.com/facebookincubator/create-react-app/issues/387.
       disableDotRule: true,
-      // 指明哪些路径映射到哪个html
-      rewrites,
     },
     public: allowedHost,
     proxy,

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    *{
+      font-family: "Microsoft YaHei", "PingFang SC", tahoma, arial, "Hiragino Sans GB", 宋体, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      margin: 0;
+      padding: 0;
+    }
+    body{
+      background-color: white;
+      font-size: 16px;
+      width: 300px;
+      padding-right: 20px;
+    }
+    .title{
+      font-size: 20px;
+      text-align: center;
+      margin-top: 4px;
+    }
+    .line{
+      margin-top: 6px;
+      height: 1px;
+      background-color: black;
+    }
+    .row{
+      margin-top: 6px;
+      width: 100%;
+    }
+    .flex-row{
+      display: flex;
+    }
+    .flex-row>label{
+      flex: 1;
+    }
+    .row>p{
+      text-align: right;
+    }
+
+    .trade-summarizing{
+      text-align: center;
+    }
+    .text-overflow {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      display: block;
+    }
+  </style>
+  <script src="../library/jquery/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+</body>
+<script>
+    let win = nw.Window.get();
+    let data = JSON.parse(localStorage.getItem("printData"));
+    let contentHtml = `
+    <p class="title">汇总单据</p>
+    <div class="line"></div>
+    <div class="row text-overflow">商户：${data.merchantName}</div>
+    <div class="row text-overflow">门店：${data.storeName}${data.subStoreName?`（${data.subStoreName}）`:''}</div>
+    <div class="row text-overflow">${data.isAdmin === 1?'店长：':'收银员：'}${data.operatorCode}(${data.operatorName})</div>
+    <div class="line"></div>
+    <div class="row">开始时间：${data.paymentBeginTime}</div>
+    <div class="row">结束时间：${data.paymentEndTime}</div>
+    <div class="row">打印时间：${data.printTime}</div>
+    <div class="line"></div>
+    ${getTradeInfo(data)}
+    <div class="line"></div>
+    <div class="trade-summarizing">交易合计：${data.tradeTotalAmount}(${Number(data.orderTotalNum)+Number(data.refundTotalNum)}笔)</div>
+    ${data.vipOrderTotalNum > 0 || data.vipRefundTotalNum > 0 ? `
+        <div class="trade-summarizing">会员合计：${data.vipTotalAmount}(${Number(data.vipOrderTotalNum)+Number(data.vipRefundTotalNum)}笔)</div>
+    `:''}
+    <div class="row" style="text-align: center;">请妥善保管小票 欢迎下次使用</div>
+    `;
+    $('body').html(contentHtml);
+    win.print({
+        printer:data.printName,
+        headerFooterEnabled: false,
+        shouldPrintBackgrounds:true,
+        marginsType:2
+    });
+  function getTradeInfo(data) {
+    let content = `
+    <div class="flex-row row">
+      <label>渠道</label>
+      <p>收/退款</p>
+    </div>`;
+    data.channelList.map(item=>{
+      content+=`
+      <div class="flex-row row">
+        <label>${item.channelName}</label>
+        <p>${item.receiveAmount}(${item.orderNum}笔)</p>
+      </div>
+      <div class="flex-row row">
+        <label></label>
+        <p>-${item.refundAmount}(${item.refundNum}笔)</p>
+      </div>
+      `;
+    });
+    content+=`
+      <div class="line"></div>
+      <div class="flex-row row">
+        <label>交易汇总</label>
+        <p>${data.tradeSumReceive}(${data.orderTotalNum}笔)</p>
+      </div>
+      <div class="flex-row row">
+        <label></label>
+        <p>-${data.tradeSumRefund}(${data.refundTotalNum}笔)</p>
+      </div>
+    `;
+    if(data.vipOrderTotalNum > 0 || data.vipRefundTotalNum > 0) {
+      content+=`
+      <div class="flex-row row">
+        <label>会员卡汇总</label>
+        <p>${data.vipSumReceive}(${data.vipOrderTotalNum}笔)</p>
+      </div>
+      <div class="flex-row row">
+        <label></label>
+        <p>-${data.vipSumRefund}(${data.vipRefundTotalNum}笔)</p>
+      </div>
+    `;
+    }
+    return content;
+  }
+</script>
+</html>

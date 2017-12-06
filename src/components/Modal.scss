@@ -1,0 +1,44 @@
+@import '../common/css/mixin-style.scss';
+.modal-ui {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(51, 51, 51, .7);
+  z-index: 999999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-app-region: drag;
+  & * {
+    -webkit-app-region: no-drag;
+  }
+  .modal-container {
+    width: 600px;
+    min-height: 200px;
+    background-color: #FFF;
+    border-radius: 6px;
+    box-shadow: 0 1px 6px 0 rgba(0,0,0,0.50);
+    position: relative;
+
+    .modal-close {
+      width: 11px;
+      height: 11px;
+      background: url(../assets/svg/close.svg) no-repeat center center;
+      background-size: cover;
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      &:hover{
+        cursor: pointer;
+      }
+      z-index: 10;
+    }
+    .title-bar{
+      font-size: 16px;
+      @include Height(30px);
+      text-align: center;
+    }
+  }
+}

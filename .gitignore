@@ -2,13 +2,17 @@
 
 # dependencies
 /node_modules
-
-# testing
-/coverage
+/nw_*/*
+/nw_*/!package.json
+/__MACOSX
 
 # production
 /build
+/cache
+build*.zip
+/dist
 /src/**/*.css
+nw-assets/
 # misc
 .idea
 .DS_Store

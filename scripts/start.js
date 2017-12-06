@@ -35,9 +35,7 @@ const useYarn = fs.existsSync(paths.yarnLockFile);
 const isInteractive = process.stdout.isTTY;
 
 // Warn and crash if required files are missing
-let fileList = [...paths.appHtmlList.map(item=>{return item.path}),...paths.appJsList.map((item)=>{return item.path})];
-// 检查文件是否合法
-if (!checkRequiredFiles(fileList)) {
+if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
   process.exit(1);
 }
 

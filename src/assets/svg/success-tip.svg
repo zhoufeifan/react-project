@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>提示-成功@2x</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0.0043902439 0.0585365854 0.0043902439 59.9999268 59.9457073 59.9999268 59.9457073 0.0585365854"></polygon>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="升级成功" transform="translate(-420.000000, -249.000000)">
+            <g id="Group-24-Copy-2" transform="translate(250.000000, 180.000000)">
+                <g id="提示-成功" transform="translate(170.000000, 69.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Clip-2"></g>
+                    <path d="M29.970878,0.0585365854 C13.4176829,0.0585365854 0,13.4762195 0,30.0294146 C0,46.5822439 13.4176829,59.9999268 29.970878,59.9999268 C46.5237073,59.9999268 59.9457073,46.5822439 59.9457073,30.0294146 C59.9457073,13.4762195 46.5237073,0.0585365854 29.970878,0.0585365854 Z M26.6947317,47.6323902 L9.57395122,30.2171707 L13.9493415,26.6892439 L23.8605366,34.4556585 C27.9069512,29.6386829 36.9155122,20.037 49.3236585,12.4284146 L50.3760732,14.8507317 C38.9771707,25.3295854 29.6441707,40.0814634 26.6947317,47.6323902 Z" id="Fill-1" fill="#1188F6" mask="url(#mask-2)"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

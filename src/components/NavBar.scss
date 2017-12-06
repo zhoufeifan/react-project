@@ -1,0 +1,42 @@
+@import '../common/css/mixin-style.scss';
+
+
+nav, .new-nav-bar {
+  box-shadow: 0 1px 2px $shadowBoxColor;
+  padding-left: 20px;
+  width: 100%;
+  background-color: white;
+  @include Height(50px);
+  ol {
+    @include clear-fix;
+    li {
+      float: left;
+      color: $deepDarkColor;
+      font-size: 16px;
+      & + li {
+        margin-left: 10px;
+      }
+    }
+  }
+  .title>a{
+    font-size: 16px;
+    color: $color-999;
+    &:hover {
+      cursor: pointer;
+    }
+    &:after {
+      content: '';
+      margin-left: 5px;
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      transform: rotate(45deg);
+      border: $lightGrayColor solid 2px;
+      border-left-width: 0;
+      border-bottom-width: 0;
+    }
+  }
+
+}
+
+

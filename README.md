@@ -1,12 +1,17 @@
-## 蚂蚁金服版商家中心项目日常维护手册  
+## 项目日常维护手册  
 ### 常用命令
 - 安装依赖
 ```
 npm install
+//安装全局依赖,（如已经安装，这忽略此步）这个包大概有200多M建议空闲时安装
+npm i -g nw@0.14.7-sdk
 ```
 - 启动项目
 ```
-npm start, server start at localhost:3000
+npm run dev 编译代码 server listen at localhost:3000
+//打开另一个终端
+npm run nw-dev //打开nw应用(dev模式)
+npm run nw-start //打开nw应用（product模式）
 ```
 - 暴露脚手架内部配置
 ```
@@ -15,7 +20,8 @@ npm run eject
 ```
 - 发布项目
 ```
-npm run build
+npm run daily 发布日常
+npm run online 发布上线
 ``` 
 
 ### 目录解说
@@ -64,11 +70,9 @@ export default Routes;
 - 图片的引入
 ```
 //通常情况下用的是import 的方式引入，10kb以内的都会以base64的形式返回(可以在config目录下的webpack配置文件中进行配置)，
-//否则返回图片的相对路径（svg除外，返回的都是路径）
-import logo from '../logo.svg';
+
 ```
 - 项目框架用了ant.design,详细资料请参照[官方文档](https://ant.design/docs/react/introduce-cn)
 
 - 该脚手架用的是create-react-app搭建的,详细的资料请参考 [官方文档](https://github.com/facebookincubator/create-react-app)
 
-- 开发，该项目用特定json渲染页面，请参考 Doc.md 文档进行开发

@@ -1,0 +1,522 @@
+/* CSS Document */
+@import "mixin-style.scss";
+
+//解决输入框变黄色问题
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+html, body {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+span, a, button, img, label {
+  -webkit-user-select: none;
+}
+button:disabled{
+  cursor: not-allowed !important;
+}
+
+div, a, button, input{
+  -webkit-app-region: no-drag;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0;
+}
+
+* {
+  font-family: "Microsoft YaHei", "PingFang SC", tahoma, arial, "Hiragino Sans GB", 宋体, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  margin: 5px;
+  box-shadow: 0 0 5px 2px #4a4747;
+  background-color: transparent;
+  overflow: hidden;
+}
+
+/*解决bootstrap的样式冲突*/
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+ol,ul{
+ margin: 0;
+}
+
+a, button, input, select, textarea {
+  &:focus {
+    outline: none !important;
+  }
+  outline: none !important;
+}
+
+li {
+  list-style: none;
+}
+
+a, a:focus, a:link, a:hover {
+  text-decoration: none;
+  cursor: pointer;
+  color: $logoDeepColor;
+}
+
+a.link {
+  color: $logoDeepColor;
+}
+
+::-ms-clear, ::-ms-reveal {
+  display: none;
+}
+
+label {
+  font-weight: normal;
+  margin-bottom: 0;
+}
+
+p {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $color-ccc;
+}
+
+.scroll {
+  overflow: hidden !important;
+  &:hover {
+    overflow: auto !important;
+  }
+}
+
+/*采宝默认的样式*/
+@include select-list-block;
+
+.caibao-input {
+  @include caibao-input();
+  @include Height(44px);
+  width: 100%;
+  font-size: 16px;
+}
+
+.caibao-button {
+  @include caibao-button();
+  display: block;
+  width: 100%;
+  @include Height(44px);
+}
+.modal-button{
+  @include caibao-button();
+  display: block;
+  border-radius: 4px;
+  width: 130px;
+  @include Height(40px);
+  @include center-block;
+}
+.caibao-select-input {
+  @extend .caibao-input;
+  background: url(../../assets/images/select-down.png) no-repeat scroll 95% 50% transparent;
+  display: block;
+  @include Height(44px);
+}
+
+.caibao-input::-webkit-input-placeholder {
+  @include caibao-input-placeholder();
+}
+
+//采宝的一些默认样式
+.default-input {
+  @include default-input;
+}
+
+.amount {
+  color: $logoDeepColor;
+  font-size: 14px;
+  .int {
+    font-size: 20px;
+  }
+}
+
+.btn {
+  padding: 0;
+  &:focus {
+    outline: 0;
+  }
+}
+
+.btn[disabled=disabled] {
+  @include disabled-btn;
+}
+
+.small-important-btn {
+  @include important-btn;
+  min-width: 80px;
+  @include Height(30px);
+}
+
+.small-default-btn {
+  @include default-btn;
+  min-width: 80px;
+  @include Height(30px);
+}
+
+.default-input::-webkit-input-placeholder {
+  font-size: 16px;
+  color: $lightGrayColor;
+}
+
+.default-modal {
+  .modal-body {
+    padding: 0;
+    padding-bottom: 20px;
+  }
+  .modal-content {
+    width: 400px;
+    @include center-block;
+    .title-bar {
+      text-align: center;
+      font-size: 16px;
+      color: $deepDarkColor;
+      @include Height(50px);
+      border-bottom: $splitLineColor solid 1px;
+      position: relative;
+      .close {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translate(0, -50%);
+        opacity: .6;
+        &:hover {
+          opacity: 1.0;
+        }
+        .icon {
+          width: 16px;
+        }
+      }
+    }
+    .input-tip {
+      color: red;
+      font-size: 14px;
+      padding-left: 10px;
+      display: none;
+    }
+    .content {
+      padding-top: 50px;
+      padding-bottom: 50px;
+      p {
+      }
+    }
+  }
+}
+
+.select-content {
+  @include select-content;
+  .select-input {
+    background: url(../../assets/images/select-down.png) no-repeat scroll 95% 50% transparent;
+  }
+  display: inline-block;
+  .select-list {
+    overflow: auto;
+  }
+}
+
+.radio-container {
+  .radio-item {
+    input[type='radio'] {
+      display: none;
+      & + label::before {
+        background-image: url(../../assets/images/radio-unchecked.png);
+      }
+
+      &:checked + label::before {
+        background-image: url(../../assets/images/radio-checked.png);
+      }
+    }
+    label {
+      @include Height(32px);
+      margin-bottom: 0;
+      font-weight: normal;
+      color: #333;
+      cursor: pointer;
+      position: relative;
+      text-align: left;
+      min-width: 80px;
+      &::before {
+        content: '';
+        display: inline-block;
+        width: 20px;
+        height: 32px;
+        float: left;
+        margin-right: 10px;
+        background: no-repeat center;
+      }
+    }
+  }
+  .radio-item.inline {
+    display: inline-block;
+  }
+}
+
+.checkbox-container {
+  .checkbox-item {
+    input[type='checkbox'] {
+      display: none;
+      & + label::before {
+        background-image: url(../../assets/images/unchecked.png);
+      }
+
+      &:checked + label::before {
+        background-image: url(../../assets/images/checked.png);
+      }
+    }
+    label {
+      @include Height(32px);
+      margin-bottom: 0;
+      font-weight: normal;
+      color: #333;
+      cursor: pointer;
+      position: relative;
+      text-align: left;
+      min-width: 80px;
+      &::before {
+        content: '';
+        display: inline-block;
+        width: 20px;
+        height: 32px;
+        float: left;
+        margin-right: 10px;
+        background: no-repeat center;
+      }
+    }
+  }
+  .checkbox-item.inline {
+    display: inline-block;
+  }
+}
+
+.select-container {
+  position: relative;
+  border: $splitLineColor solid 1px;
+  .select-input {
+    padding-left: 10px;
+    background: url(../../assets/images/select-down.png) no-repeat scroll 95% 50% transparent;
+    &::-webkit-input-placeholder {
+      font-size: 14px;
+    }
+    &:hover, &:focus {
+      box-shadow: 0 0 2px 1px $logoDeepColor;
+      border-color: $logoLightColor;
+    }
+    width: 200px;
+    @include Height(32px);
+  }
+  .select-list {
+    background-color: #ffffff;
+    position: absolute;
+    box-shadow: 0 0 5px 2px $shadowColor;
+    width: 100%;
+    display: none;
+    z-index: 1;
+    .select-list-ul {
+      position: relative;
+      max-height: 120px;
+      width: 100%;
+      overflow-y: auto;
+      margin-bottom: 0;
+      li {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        font-size: 16px;
+        @include Height(30px);
+        color: $deepDarkColor;
+        &:hover {
+          background-color: $logoDeepColor;
+          color: #ffffff;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.main-color {
+  color: $logoDeepColor !important;
+}
+.waring-color {
+  color: $waringColor !important;
+}
+.selected {
+  &,& *{
+    -webkit-user-select: initial;
+  }
+}
+
+.btn-container {
+  @include center-block;
+  margin-top: 10px;
+  width: 100%;
+  display: -webkit-flex;
+  button {
+    flex: 1;
+    & + button {
+      margin-left: 10px;
+    }
+  }
+}
+
+.important-btn {
+  @include important-btn;
+}
+
+.less-important-btn {
+  @extend .important-btn;
+  background-color: white;
+  color: $logoDeepColor;
+  border: $logoDeepColor solid 1px;
+  &:hover:not(:disabled) {
+    background-color: $logoDeepColor;
+    color: white;
+  }
+  &:focus {
+    color: $logoDeepColor;
+  }
+  &:disabled {
+    opacity: .5;
+  }
+}
+
+span.link-btn {
+  color: $logoDeepColor;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.text-overflow {
+  @include text-overflow();
+}
+
+.error-tip {
+  color: $waringColor;
+  font-size: 14px;
+  padding-left: 10px;
+  &.fixed {
+    visibility: hidden;
+  }
+  &.flex {
+    display: none;
+  }
+}
+
+.rotate {
+  -webkit-animation: rotate 1s infinite linear;
+}
+
+@-webkit-keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+.horizontal-line {
+  border-bottom: $color-ccc solid 1px;
+}
+
+.modal {
+  -webkit-app-region: drag;
+  .modal-content * {
+    -webkit-app-region: no-drag;
+  }
+}
+
+.cover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  z-index: 201;
+  opacity: .6;
+  display: none;
+  .cover-icon {
+    position: absolute;
+    top: 48%;
+    left: 48%;
+    width: 40px;
+    height: 40px;
+    background-size: 40px 40px;
+    background-image: url(~imagesDir/waiting.jpg);
+  }
+}
+
+// 新版样式
+.btn-important{
+  padding-right: 5px;
+  padding-left: 5px;
+  border-radius: 4px;
+  background-color: $mainColor;
+  color: $color-fff;
+  font-size: 16px;
+  @include Height(40px);
+  &:hover{
+    background-color: darken($mainColor, 10%);
+    cursor: pointer;
+  }
+  &:disabled{
+    opacity: .6;
+  }
+}
+
+.btn-less-important{
+  padding-right: 5px;
+  padding-left: 5px;
+  border-radius: 4px;
+  border:1px solid $mainColor;
+  background-color: $color-fff;
+  color: $mainColor;
+  font-size: 16px;
+  @include Height(40px);
+  &:hover:not(:disabled) {
+    border: 1px solid darken($logoDeepColor, 10%);
+    color: darken($logoDeepColor, 10%);
+  }
+  &:disabled {
+    opacity: .5;
+  }
+}
+
+.hidden{
+  display: none !important;
+}

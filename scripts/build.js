@@ -30,10 +30,8 @@ const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild;
 const useYarn = fs.existsSync(paths.yarnLockFile);
 
 // Warn and crash if required files are missing
-let fileList = [...paths.appHtmlList.map(item=>{return item.path}),...paths.appJsList.map((item)=>{return item.path})];
-// 检查文件是否合法
-if (!checkRequiredFiles(fileList)) {
-    process.exit(1);
+if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
+  process.exit(1);
 }
 
 // First, read the current file sizes in build directory.

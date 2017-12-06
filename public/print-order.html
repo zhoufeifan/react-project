@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      font-family: "Microsoft YaHei", "PingFang SC", tahoma, arial, "Hiragino Sans GB", 宋体, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: white;
+      font-size: 16px;
+      width: 300px;
+      padding-right: 20px;
+    }
+
+    .title {
+      font-size: 20px;
+      text-align: center;
+      margin-top: 4px;
+    }
+
+    .line {
+      margin-top: 6px;
+      height: 1px;
+      background-color: black;
+    }
+
+    .row {
+      margin-top: 6px;
+      width: 100%;
+    }
+
+    .flex-row {
+      display: flex;
+    }
+
+    .flex-row>label {
+      flex: 1;
+    }
+
+    .row>p {
+      text-align: right;
+    }
+
+    hr {
+      margin-top: 4px;
+      margin-bottom: 4px;
+    }
+
+    .repair {
+      font-size: 12px;
+    }
+
+    .rececive-amount {
+      font-size: 22px;
+    }
+
+    .signature {
+      height: 30px;
+      line-height: 30px;
+    }
+
+    .text-overflow {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      display: block;
+    }
+
+    .bar-code {
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+  </style>
+  <script src="../library/jquery/jquery-1.11.1.min.js"></script>
+  <script src="../library/JsBarcode.all.min.js"></script>
+</head>
+
+<body>
+</body>
+<script>
+    let data = JSON.parse(localStorage.getItem("printData"));
+    let contentHtml = `
+    <p class="title text-overflow">${data.merchantName}</p>
+    <p class="title text-overflow">${data.storeName}${data.subStoreName ? `(${data.subStoreName})` : ''}</p>
+    ${data.isRepair ? '<span class="repair">补打印</span>' : ''}
+    <div class="line"></div>
+    <div class="row">交易状态：${data.tradeStatus}</div>
+    <div class="row">付款渠道：${data.paymentChannel}</div>
+    <div class="row text-overflow">${data.orderStatus === '5' ? '退款员' : '收 银 员'}：${data.operatorCode === 'qrcode' ? '二维码' : data.operatorCode}(${data.operatorName})</div>
+    <div class="row">${data.orderStatus === '5' ? '退款时间' : '收款时间'}：${data.tradeTime}</div>
+    <div class="row">打印时间：${data.printTime}</div>
+    <div class="row">交易编号：</div>
+    <div class="row text-center">${data.orderNo}</div>
+    <div class="line"></div>
+    ${
+        data.orderStatus === '5' ?
+            `
+      <div class="flex-row row">
+        <label>收款金额</label>
+        <p>${data.orderReceiveAmount}</p>
+      </div>
+      <div class="flex-row row rececive-amount">
+        <label>退款金额</label>
+        <p>-${data.refundAmount}</p>
+      </div>
+    `:
+            `
+      <div class="flex-row row">
+        <label>消费总金额</label>
+        <p>${data.totalAmount}</p>
+      </div>
+      <div class="flex-row row">
+        <label>商家优惠</label>
+        <p>-${data.discountAmount}</p>
+      </div>
+      ${getGoodsInfo(data.goodsDetail, data.discounts)}
+      <div class="flex-row row rececive-amount">
+        <label>实收金额</label>
+        <p>${data.receiveAmount}</p>
+      </div>
+      `
+        }
+    <div class="line"></div>
+    <div class="signature">签名栏：</div>
+    <div class="line" style="margin-top: 30px;"></div>
+    ${data.orderNoPrint ? `<svg id="code128" class="bar-code"></svg>` : ``}
+    <div class="row text-center">请妥善保管小票 欢迎下次光临</div>
+    `;
+    $('body').html(contentHtml);
+    if (data.orderNoPrint) {
+        JsBarcode("#code128", data.orderNoPrint, {
+            width: 2.5,
+            height: 80,
+            fontSize: 24
+        });
+    }
+
+    let win = nw.Window.get();
+    win.print({
+        printer: data.printName,
+        headerFooterEnabled: false,
+        shouldPrintBackgrounds: true,
+        marginsType: 2
+    });
+
+    function getGoodsInfo(goodsList, goodsDiscountList) {
+        let content = '';
+        goodsList.map((goodsItem) => {
+            content += `
+      <div class="flex-row row">
+        <label>${goodsItem.goodsName}*${goodsItem.goodsNum}</label>
+        <p>${goodsItem.totalPrice}</p>
+      </div>`;
+        });
+        if (goodsList.length) { content += '<div class="line"></div>' }
+
+        goodsDiscountList.map((discountItem) => {
+            content += `
+      <div class="flex-row row">
+        <label>${discountItem.discountName}</label>
+        <p>-${discountItem.discountAmount}</p>
+      </div>`;
+        });
+        if (goodsDiscountList.length) { content += '<div class="line"></div>' }
+
+        return content;
+    }
+
+</script>
+
+</html>

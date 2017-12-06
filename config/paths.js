@@ -33,32 +33,18 @@ const getPublicUrl = appPackageJson =>
 // like /todos/42/static/js/bundle.7289d.js. We have to know the root.
 function getServedPath(appPackageJson) {
   const publicUrl = getPublicUrl(appPackageJson);
-  const servedUrl = envPublicUrl ||
-    (publicUrl ? url.parse(publicUrl).pathname : '/');
+  const servedUrl =
+    envPublicUrl || (publicUrl ? url.parse(publicUrl).pathname : '/');
   return ensureSlash(servedUrl, true);
-}
-
-let appHtmlList = getChunkList(resolveApp('public'),"(.+)\\.(html|htm)$");
-let appJsList = getChunkList(resolveApp('src/pages'),"(.+)\\.(js|jsx)$");
-
-function getChunkList(path,pattern) {
-  let files = fs.readdirSync(path);
-  let result = [];
-  files.forEach(function (fileName) {
-      if(fileName.match(new RegExp(pattern))){
-        result.push({name:fileName.replace(/\..+$/,''),path:`${path}/${fileName}`});
-      }
-  });
-  return result;
 }
 
 // config after eject: we're in ./config/
 module.exports = {
   dotenv: resolveApp('.env'),
-  appBuild: resolveApp('build'),
+  appBuild: resolveApp('dist'),
   appPublic: resolveApp('public'),
-  appHtmlList,
-  appJsList,
+  appHtml: resolveApp('public/index.html'),
+  appIndexJs: resolveApp('src/index.js'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   yarnLockFile: resolveApp('yarn.lock'),
