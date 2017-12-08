@@ -63,3 +63,34 @@ $color-f8: #f8f8f8;
   transform: translate(-50%, -50%) !important;
 }
 
+/*采宝公共双按钮样式*/
+@mixin btn-double-body {
+  .btn-double-body {
+    font-size: 0;
+  }
+  .cancel, .confirm {
+    border-radius: 2px;
+    display: inline-block;
+    border-width: 1px;
+    text-align: center;
+  }
+  .cancel {
+    color: $logoLightColor;
+    float: left;
+    border: $logoLightColor solid 1px;
+    &:hover {
+      cursor: pointer;
+      background-color: $logoLightColor;
+      color: #ffffff;
+    }
+  }
+  .confirm {
+    float: right;
+    color: #ffffff;
+    background-color: $logoDeepColor;
+    &:hover {
+      cursor: pointer;
+      background-color: darken($logoDeepColor, 10%);
+    }
+  }
+}
