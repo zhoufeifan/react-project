@@ -1,0 +1,65 @@
+/*存放公共的样式以及模块函数*/
+$logoDeepColor: #1188F6; //logo主色
+$logoLightColor: #1188F6; //logo辅色
+$mainColor: #1188F6;//主色调
+$splitLineColor: #dddddd; //分割线颜色
+$grayColor: #666666; //深灰色
+$lightGrayColor: #999999; //浅灰色
+$deepDarkColor: #333333; //深黑色
+$borderColor: #eeeeee; //表单边框元素
+$pureBlackColor: #000000; //纯黑色
+$shadowColor: #999999; //阴影颜色
+$fontColor: #333333; //字体颜色
+$waringColor: #F04134; //警告颜色
+$amountColor: #F9572C; //金额颜色
+$shadowBoxColor: rgba(0, 0, 0, .1);
+$color-999: #999999;
+$color-333: #333333;
+$color-eee: #eeeeee;
+$color-666: #666666;
+$color-ddd: #dddddd;
+$color-ccc: #cccccc;
+$color-f5: #f5f5f5;
+$color-fff: #ffffff;
+$color-D0: #D0D0D0;
+$color-f8: #f8f8f8;
+@mixin center-block {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+//参数冒号后面的值为默认值
+@mixin Height($height:30px) {
+  height: $height;
+  line-height: $height;
+}
+
+@mixin clear-fix {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin text-overflow {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+}
+
+@mixin center-position {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%) !important;
+  -moz-transform: translate(-50%, -50%) !important;
+  -ms-transform: translate(-50%, -50%) !important;
+  -o-transform: translate(-50%, -50%) !important;
+  transform: translate(-50%, -50%) !important;
+}
+

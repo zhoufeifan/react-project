@@ -1,11 +1,13 @@
-@import '../common/css/mixin-style.scss';
+@import 'mixin/style.scss';
 .user-input-container{
   border: $color-eee 1px solid;
   width: 100%;
   display: flex;
+  border-radius: 4px;
   .icon-container{
+    text-align: center;
     border-right: $color-eee solid 1px;
-    @include Height(38px);
+    @include Height(40px);
     width: 40px;
   }
   .input-container{
@@ -19,8 +21,10 @@
     }
     .user-input{
       padding-left: 10px;
-      @include Height(38px);
-      width: 100%;
+      @include Height(36px);
+      margin:2px;
+      display: block;
+      //width: 100%;
       &::-webkit-input-placeholder{
         color: $color-ccc;
       }

@@ -1,0 +1,168 @@
+
+
+
+/* CSS Document */
+@import "mixin/style.scss";
+
+//解决输入框变黄色问题
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+html, body {
+  height: 100%;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+hr{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 0;
+  border-top: 1px solid #eee;
+}
+
+button:disabled{
+  cursor: not-allowed !important;
+}
+
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+img{
+  vertical-align: middle;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0;
+}
+
+* {
+  font-family: "Microsoft YaHei", "PingFang SC", tahoma, arial, "Hiragino Sans GB", 宋体, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+ol,ul{
+  margin: 0;
+}
+
+a, button, input, select, textarea {
+  &:focus {
+    outline: none !important;
+  }
+  outline: none !important;
+}
+
+li {
+  list-style: none;
+}
+
+a, a:focus, a:link, a:hover {
+  text-decoration: none;
+  cursor: pointer;
+  color: $logoDeepColor;
+}
+
+a.link {
+  color: $logoDeepColor;
+}
+
+::-ms-clear, ::-ms-reveal {
+  display: none;
+}
+
+label {
+  font-weight: normal;
+  margin-bottom: 0;
+}
+
+p {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $color-ccc;
+}
+
+.scroll {
+  overflow: hidden !important;
+  &:hover {
+    overflow: auto !important;
+  }
+}
+
+.default-input::-webkit-input-placeholder {
+  font-size: 16px;
+  color: $lightGrayColor;
+}
+
+.text-overflow {
+  @include text-overflow();
+}
+
+.rotate {
+  -webkit-animation: rotate 1s infinite linear;
+}
+
+@-webkit-keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+.horizontal-line {
+  border-bottom: $color-ccc solid 1px;
+}
+
+
+.cover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  z-index: 201;
+  opacity: .6;
+  display: none;
+  .cover-icon {
+    position: absolute;
+    top: 48%;
+    left: 48%;
+    width: 40px;
+    height: 40px;
+    background-size: 40px 40px;
+    background-image: url(~imagesDir/waiting.jpg);
+  }
+}
+
+
+.hidden{
+  display: none !important;
+}

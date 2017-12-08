@@ -14,7 +14,7 @@ class UserInput extends React.Component {
     componentDidMount() {
         const {optionList} = this.props;
         if(optionList && optionList.length>0){
-            this.props.onSelect(optionList[0]);
+            this.props.onSelect && this.props.onSelect(optionList[0]);
         }
     }
 
@@ -32,6 +32,7 @@ class UserInput extends React.Component {
                 {optionList.map(item => {
                     return (<li key={item} className="select-item" onClick={() => {
                         this.props.onSelect && this.props.onSelect(item);
+                        this.refs.input.value=item;
                     }}>{item}</li>);
                 })}
             </ul>

@@ -5,62 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <link rel="stylesheet" href="./library/bootstrap/bootstrap-3.3.5.min.css?v=1.0.0"/>
-    <script src="./library/jquery/jquery-1.11.1.min.js"></script>
-    <script src="./library/bootstrap/modal.js?v=1.1.0" async="async"></script>
-    <!--打印插件-->
-    <!--<script src="./library/LodopFuncs.js?v=1.0.0"></script>-->
-    <!--<object id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0-->
-            <!--style="display:inherit">-->
-        <!--<embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0></embed>-->
-    <!--</object>-->
-    <!--<script type="text/javascript">-->
-        <!--window.LODOP = null;-->
-        <!--setTimeout(function () {-->
-            <!--try {-->
-                <!--window.LODOP = getLodop(document.getElementById('LODOP_OB'), document.getElementById('LODOP_EM'));-->
-            <!--}-->
-            <!--catch (e) {-->
-                <!--console.log('3.3.1打印插件加载失败');-->
-                <!--globalMethod.openPrinter();-->
-            <!--}-->
-        <!--}, 2000);-->
-    <!--</script>-->
     <title>收银台</title>
-    <style type="text/css">
-        body {
-            margin: 0 !important;
-        }
-
-        .modal-backdrop {
-            margin: 0 !important;
-        }
-    </style>
-    <script>
-        window.dataInfo = {
-            webVersion: "3.8.1"
-        };
-        window.updateInfoList = [
-            "1、【新增】商品收款支持记账；",
-            "2、【新增】订单详情页面增加商家优惠明细展示；",
-            "3、【调整】优化报表页面查询逻辑，查询区间调整为7天；",
-            "4、【新增】支持小票打印条码，可以快速定位订单；",
-            "5、【优化】登录页、商品收银页、报表页、订单详情页进行了界面优化。"
-        ];
-    </script>
-    <script src="./dist/globalAPI-v0.14.7.js"></script>
-    <!--<script src="./dist/globalAPI-v0.12.3.js"></script>-->
-    <!-- start Dplus -->
-    <!--<script type="text/javascript">-->
-        <!--!function(a,b){if(!b.__SV){var c,d,e,f;window.dplus=b,b._i=[],b.init=function(a,c,d){function g(a,b){var c=b.split(".");2==c.length&&(a=a[c[0]],b=c[1]),a[b]=function(){a.push([b].concat(Array.prototype.slice.call(arguments,0)))}}var h=b;for("undefined"!=typeof d?h=b[d]=[]:d="dplus",h.people=h.people||[],h.toString=function(a){var b="dplus";return"dplus"!==d&&(b+="."+d),a||(b+=" (stub)"),b},h.people.toString=function(){return h.toString(1)+".people (stub)"},e="disable track track_links track_forms register unregister get_property identify clear set_config get_config get_distinct_id track_pageview register_once track_with_tag time_event people.set people.unset people.delete_user".split(" "),f=0;f<e.length;f++)g(h,e[f]);b._i.push([a,c,d])},b.__SV=1.1,c=a.createElement("script"),c.type="text/javascript",c.charset="utf-8",c.async=!0,c.src="https://w.cnzz.com/dplus.php?id=1266849888",d=a.getElementsByTagName("script")[0],d.parentNode.insertBefore(c,d)}}(document,window.dplus||[]),dplus.init("1266849888");-->
-    <!--</script>-->
-    <!-- end Dplus -->
 </head>
 <body>
-<div class="cover" id="mainCover">
-    <div class="cover-icon"></div>
-</div>
 <div id="root"></div>
 </body>
-
 </html>

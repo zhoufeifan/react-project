@@ -88,9 +88,7 @@ module.exports = {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       components: `${config.rootPath}/src/components`,
-      common: `${config.rootPath}/src/common`,
-      commonJs: `${config.rootPath}/src/common/js`,
-      commonCss: `${config.rootPath}/src/common/css`,
+      mixin: `${config.rootPath}/src/mixin`,
       pages: `${config.rootPath}/src/pages`,
       store: `${config.rootPath}/src/store`,
       utils: `${config.rootPath}/src/utils`,
